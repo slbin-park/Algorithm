@@ -1,10 +1,14 @@
+import itertools
+
 n = int(input())
 arr = list(map(int, input().split()))
-arr.sort(reverse=True)
+arr.sort()
+arr2 = list(itertools.permutations(arr, n))
 res = 0
-print(arr)
-for i in range(n // 2):
-    res += arr[i] - arr[-i - 1]
-    print(arr[i], arr[-i - 1])
-    print(res)
+for i in range(len(arr2)):
+    cur = 0
+    for j in range(0, n - 1):
+        cur += abs(arr2[i][j] - arr2[i][j + 1])
+    if cur > res:
+        res = cur
 print(res)
