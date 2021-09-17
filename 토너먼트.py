@@ -16,5 +16,5 @@ while 1:
     if n == m:
         break
     n = go_to(n)
-    m = go순_to(m)
+    m = go_to(m)
 print(cnt - 1)
