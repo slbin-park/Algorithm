@@ -17,7 +17,7 @@ cnt = 0
 res = [0 for i in range(arrlen)]
 res[0] = 1
 
-if 10 <= int(n[0] + n[1]) < 35 and res[1] != '0':
+if 10 <= int(n[0] + n[1]) < 35 and n[1] != '0':
     res[1] = 2
 else:
     res[1] = 1
