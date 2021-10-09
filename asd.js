@@ -39,12 +39,21 @@
 // console.log(person.f1());
 // console.log(f2(person));
 var pizza = {
-    name= '자바피자',
-    radius=10,
+    name: '자바피자',
+    radius: 10,
 
 
     getArea: function () { return this.radius * this.radius * 3.14; }
 };
+var dounts = {
+    name: '자바 도넛',
+    radius: 2,
 
+    getArea: function () {
+        console.log('rd : ', this.radius)
+        return (this.radius * this.radius * 3.14);
+    }
+}
 
 console.log(pizza.name + "의 면적은" + pizza.getArea())
+console.log(dounts.name + "의 면적은 " + dounts.getArea())
