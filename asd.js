@@ -8,13 +8,43 @@
 // const add3 = (x, y, z) => x + y + z
 // console.log(max(20, 10))
 // console.log(add3(10, 20, 30))
-var x = 1;
-function foo() {
-    x = 10;
-    bar();
-}
-function bar() {
-    console.log(x)
-}
-foo();
-bar()
+// var x = 1;
+// function foo() {
+//     var x = 10;
+//     bar(x);
+// }
+// function bar(x) {
+//     console.log(x)
+// }
+// foo();
+// bar(x);
+// function f1() { return this.lastName; }
+// function f2(obj) {
+//     console.log(obj)
+//     return obj.fistName;
+// }
+
+// lastName = "Kim"
+
+// const person = {
+//     fistName: 'Geonho',
+//     lastName,
+//     getName: function () { return this.lastName + '' + this.fistName; },
+//     getLastName: function () { return 'Mr' + this.lastName; },
+//     f1
+// };
+
+// console.log(person.getName());
+// console.log(person.getLastName());
+// console.log(person.f1());
+// console.log(f2(person));
+var pizza = {
+    name= '자바피자',
+    radius=10,
+
+
+    getArea: function () { return this.radius * this.radius * 3.14; }
+};
+
+
+console.log(pizza.name + "의 면적은" + pizza.getArea())
