@@ -38,22 +38,43 @@
 // console.log(person.getLastName());
 // console.log(person.f1());
 // console.log(f2(person));
-var pizza = {
-    name: '자바피자',
+// var pizza = {
+//     name: '자바피자',
+//     radius: 10,
+
+
+//     getArea: function () { return this.radius * this.radius * 3.14; }
+// };
+// var dounts = {
+//     name: '자바 도넛',
+//     radius: 2,
+
+//     getArea: function () {
+//         console.log('rd : ', this.radius)
+//         return (this.radius * this.radius * 3.14);
+//     }
+// }
+
+// console.log(pizza.name + "의 면적은" + pizza.getArea())
+// console.log(dounts.name + "의 면적은 " + dounts.getArea())
+const pizza = {
+    name: 'pizza',
     radius: 10,
 
+    getArea: (obj) => obj.radius * obj.radius * 3.14,
+    getName: (obj) => obj.name,
+    getRead: (obj) => obj.name + ' ' + obj.getArea(obj)
 
-    getArea: function () { return this.radius * this.radius * 3.14; }
-};
-var dounts = {
-    name: '자바 도넛',
-    radius: 2,
-
-    getArea: function () {
-        console.log('rd : ', this.radius)
-        return (this.radius * this.radius * 3.14);
-    }
 }
 
-console.log(pizza.name + "의 면적은" + pizza.getArea())
-console.log(dounts.name + "의 면적은 " + dounts.getArea())
+
+const donut = {
+    name: 'donut',
+    radius: 2,
+    getArea: (obj) => obj.radius * obj.radius * 3.14,
+    getName: (obj) => obj.name,
+    getRead: (obj) => obj.name + "'s area " + obj.getArea(obj),
+}
+
+// console.log(pizza.getArea(pizza)+" "+pizza.getName(pizza)+""+pizza.getRead(pizza))
+console.log(donut.getRead(pizza))

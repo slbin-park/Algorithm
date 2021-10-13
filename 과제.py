@@ -1,14 +1,31 @@
-add1 = lambda x, y: x + y
-add2 = lambda x: lambda y: x + y
-max = lambda x: lambda y: x if (x > y) else y
-add3 = lambda x: lambda y: lambda z: x + y + z
-add32 = lambda x: (lambda y: (lambda z: x + y + z))
+import sys
 
-test1 = add1(10, 20)
-test2 = add2(10)(20)
-test3 = max(20)(10)
-test4 = add3(10)(20)(30)
-test5 = add32(10)(20)(30)
+input = sys.stdin.readline
 
-print(test3)
-print(test4)
+n = int(input())
+arr = [[] for i in range(n)]
+for i in range(n):
+    a, b = map(int, input().split())
+    arr[i] = [a, b]
+arr.sort(key=lambda x: x[0])
+res = [0 for i in range(1001)]
+for i in range(n):
+    flag = 0
+    flag2 = 0
+    minindex = 0
+    minum = arr[i][1]
+    for j in range(arr[i][0]):
+        if res[j] == 0:
+            res[j] = arr[i][1]
+            flag = 1
+            break
+    if flag == 0:
+        for j in range(arr[i][0]):
+            if minum > res[j]:
+                minum = res[j]
+                minindex = j
+                flag2 = 1
+    if flag2 == 1:
+        res[minindex] = arr[i][1]
+print(sum(res))
+# print(res)
