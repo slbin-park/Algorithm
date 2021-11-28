@@ -12,4 +12,3 @@ for _ in range(n):  # 1부터 5까지
         print(2)
     else:
         print(0)
-# 송승준병신
