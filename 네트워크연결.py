@@ -36,7 +36,6 @@ for i in range(m):
     ))
 
 arr.sort(key=lambda x: x[0])
-
 for dis, a, b in arr:
     if find(a) != find(b):  # 루트가 같으면 할 필요가 없음
         union(a, b)
