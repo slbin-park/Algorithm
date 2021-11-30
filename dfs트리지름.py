@@ -36,3 +36,4 @@ visited = [0 for i in range(n + 1)]
 dfs(idx, 0)
 visited[idx] = 0
 print(max(visited))
+#https://ca.ramel.be/112
