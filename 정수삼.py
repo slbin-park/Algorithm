@@ -4,6 +4,8 @@ for i in range(len(triangle)):
     res.append(triangle[i])
 print(res)
 
+# 수정
+
 
 def solution(triangle):
     arr = [[] for i in range(len(triangle))]
