@@ -4,7 +4,7 @@ for i in range(len(triangle)):
     res.append(triangle[i])
 print(res)
 
-# 수정
+# 수정 1
 
 
 def solution(triangle):
