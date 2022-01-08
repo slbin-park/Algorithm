@@ -35,3 +35,5 @@ for i in range(n):
             dq.append((i, j))
 ans = bfs()
 print(ans)
+for i in range(n):
+    print(visited[i])
