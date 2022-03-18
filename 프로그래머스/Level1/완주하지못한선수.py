@@ -2,12 +2,7 @@ def solution(participant, completion):
     answer = ''
     participant.sort()
     completion.sort()
-    j = 0
-    for i in range(len(participant)):
-        if i>=len(completion):
-            return participant[i]
-        if participant[i] == completion[i]:
-            continue;
-        else:
+    for i in range(len(completion)):
+        if participant[i] != completion[i]:
             return participant[i]
     return participant[-1]
