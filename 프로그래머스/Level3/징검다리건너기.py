@@ -13,8 +13,8 @@ def solution(stones, k):
             if cur >= k:
                 break
         if cur < k:
-            start += 1
+            start = mid + 1
         else:
-            end -= 1
+            end = mid - 1
             answer = mid
     return answer
