@@ -2,34 +2,35 @@ import sys
 import heapq
 
 INF = 1e9
+input = sys.stdin.readline
 
 
 def dijkstra(start, end):
     heap = []
-    dis = [INF for i in range(n + 1)]
-    dis[start] = 0
-    heapq.heappush(heap, (0, start))
+    heapq.heappush(heap, [start, 0])
+    distance = [INF for i in range(n + 1)]
+    distance[start] = 0
     while heap:
-        cost, index = heapq.heappop(heap)
-        if cost > dis[index]:
+        idx, cost = heapq.heappop(heap)
+        if distance[idx] > cost:
             continue
-        for i, c in graph[index]:
-            if dis[i] > dis[index] + c:
-                dis[i] = dis[index] + c
-                heapq.heappush(heap, (dis[i], i))
-    return dis[end]
+        for next, cst in arr[idx]:
+            if distance[next] > cost + cst:
+                distance[next] = cost + cst
+                heapq.heappush(heap, [next, cost + cst])
+    return distance[end]
 
 
-n, m = map(int, input().split())
-graph = [[] for i in range(n + 1)]
-for i in range(m):
-    s, e, c = map(int, input().split())
-    graph[s].append((e, c))
-    graph[e].append((s, c))
+n, e = map(int, input().split())
+arr = [[] for i in range(n + 1)]
+for i in range(e):
+    u, v, w = map(int, input().split())
+    arr[u].append([v, w])
+    arr[v].append([u, w])
 start, end = map(int, input().split())
-ans1 = dijkstra(1, start) + dijkstra(start, end) + dijkstra(end, n)
-ans2 = dijkstra(1, end) + dijkstra(end, start) + dijkstra(start, n)
-if ans1 >= INF and ans2 >= INF:
-    print(-1)
-else:
-    print(min(ans1, ans2))
+
+res1 = dijkstra(1, start) + dijkstra(start, end) + dijkstra(end, n)
+res2 = dijkstra(1, end) + dijkstra(end, start) + dijkstra(start, n)
+res = min(res1, res2)
+res = res if res < INF else -1
+print(res)
