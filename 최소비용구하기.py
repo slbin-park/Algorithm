@@ -1,33 +1,31 @@
 import sys
-from collections import deque
 import heapq
 
-INF = 1e9
 input = sys.stdin.readline
+INF = 1e9
 
 
-def dijkstra(start, end):
+def dijkstra(start):
     heap = []
-    heapq.heappush(heap, (0, start))
-    dis = [INF] * (n + 1)
-    dis[start] = 0
-
+    heapq.heappush(heap, [start, 0])
+    distance[start] = 0
     while heap:
-        cos, index = heapq.heappop(heap)
-        if dis[index] < cos:
+        idx, cost = heapq.heappop(heap)
+        if cost > distance[idx]:
             continue
-        for e, c in bus[index]:
-            if dis[e] > cos + c:
-                dis[e] = cos + c
-                heapq.heappush(heap, (cos + c, e))
-    return dis[end]
+        for next, cst in arr[idx]:
+            if distance[next] > cost + cst:
+                distance[next] = cost + cst
+                heapq.heappush(heap, [next, cost + cst])
 
 
 n = int(input())
 m = int(input())
-bus = [[] for i in range(n + 1)]
+distance = [INF for i in range(n + 1)]
+arr = [[] for i in range(n + 1)]
 for i in range(m):
-    s, e, c = map(int, input().split())
-    bus[s].append((e, c))
+    u, v, w = map(int, input().split())
+    arr[u].append([v, w])
 start, end = map(int, input().split())
-print(dijkstra(start, end))
+dijkstra(start)
+print(distance[end])
