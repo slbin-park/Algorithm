@@ -1,0 +1,19 @@
+import heapq
+
+
+def solution(operations):
+    answer = []
+    heap = []
+    for i in range(len(operations)):
+        str1, value = operations[i].split()
+        if str1 == 'I':
+            heapq.heappush(heap, int(value))
+        if str1 == 'D' and len(heap) > 0:
+            if value[0] == '1':
+                heap.pop()
+            else:
+                heapq.heappop(heap)
+    if len(heap) == 0:
+        return [0, 0]
+    heap.sort()
+    return [heap[-1],heap[0]]
