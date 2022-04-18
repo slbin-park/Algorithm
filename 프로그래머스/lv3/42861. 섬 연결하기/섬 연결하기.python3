@@ -1,0 +1,23 @@
+import heapq
+
+
+def solution(n, costs):
+    answer = 0
+    def find(parent,n):
+        if parent[n] !=n:
+            parent[n] = find(parent,parent[n])
+        return parent[n]
+    def union(parent,a,b):
+        a = find(parent,a)
+        b = find(parent,b)
+        if a>b:
+            parent[a] = b
+        else:
+            parent[b] = a
+    costs.sort(key=lambda x : x[2])
+    arr = [i for i in range(n)]
+    for a,b,v in costs:
+        if find(arr,a) != find(arr,b):
+            union(arr,a,b)
+            answer+=v
+    return answer
