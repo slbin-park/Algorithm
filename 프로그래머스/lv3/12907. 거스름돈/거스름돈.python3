@@ -1,0 +1,8 @@
+def solution(n, money):
+    answer = 0
+    arr = [0 for i in range(n+1)]
+    arr[0] = 1
+    for v in money:
+        for i in range(v,n+1):
+            arr[i] += arr[i-v]
+    return arr[-1]
