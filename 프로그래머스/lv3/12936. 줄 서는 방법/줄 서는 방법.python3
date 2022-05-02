@@ -1,0 +1,17 @@
+import math
+def solution(n, k):
+    answer = []
+    arr = [i for i in range(1,n+1)]
+    while (n != 0):
+        # 한 사람이 앞에 줄을 섰을 때의 경우의 수
+        f_num = math.factorial(n) // n
+        # k번째를 구하기 위해 한 사람이 앞에 줄을 섰을 때의 경우의 수를 지나간 수
+        passed = k // f_num
+        # 나머지를 k에 넣기
+        k = k % f_num
+        if k == 0:
+            answer.append(arr.pop(passed - 1))
+        else:
+            answer.append(arr.pop(passed))
+        n -= 1
+    return answer
