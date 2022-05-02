@@ -1,0 +1,31 @@
+import heapq
+def dijkstra(start,n,arr):
+    heap = [] 
+    dis = [1e9 for i in range(n+1)]
+    dis[start] = 0
+    heapq.heappush(heap,[0,start])
+    while heap:
+        cost , idx = heapq.heappop(heap)
+        if dis[idx] < cost:
+            continue
+        for nxt,cst in arr[idx]:
+            if dis[nxt] > cost+cst:
+                dis[nxt] = cost+cst
+                heapq.heappush(heap,[cost+cst,nxt])
+    return dis
+            
+def solution(n, s, a, b, fares):
+    answer = 923523599
+    arr = [[] for i in range(n+1)]
+    for u,v,w in fares:
+        arr[u].append([v,w])
+        arr[v].append([u,w])
+    # s 출발지점
+    # a 도착점1
+    # b 도착점2
+    
+    # 따로가는 비용 체크
+    distance = [dijkstra(i,n,arr) for i in range(n+1)]
+    for i in range(1,n+1):
+        answer = min(distance[i][a]+distance[i][b]+distance[i][s],answer)
+    return answer
