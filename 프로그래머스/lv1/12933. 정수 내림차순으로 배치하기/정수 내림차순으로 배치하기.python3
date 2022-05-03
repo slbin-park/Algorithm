@@ -1,0 +1,9 @@
+def solution(n):
+    answer = 0
+    res = []
+    n = str(n)
+    for i in range(len(n)):
+        res.append(n[i])
+    res.sort(reverse = True)
+        
+    return int(''.join(res))
