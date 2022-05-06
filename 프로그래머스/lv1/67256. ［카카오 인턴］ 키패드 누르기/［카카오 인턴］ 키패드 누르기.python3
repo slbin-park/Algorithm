@@ -1,0 +1,50 @@
+def check_num(num):
+    if num==2 or num==5 or num ==8 or num==0:
+        return True
+    else:
+        return False
+def check_lr(num):
+    if num==1 or num ==4 or num== 7:
+        return True
+    else:
+        return False
+    
+def solution(numbers, hand):
+    answer = ''
+    dic = {}
+    left = [3,0]
+    right = [3,2]
+    num = 1
+    for i in range(3):
+        for j in range(3):
+            dic[num] = [i,j]
+            num+=1
+    dic[0] = [3,1]
+    for item in numbers:
+        curx = dic[item][0]
+        cury = dic[item][1]
+        left_l = abs(curx-left[0]) + abs(cury-left[1])
+        right_l = abs(curx-right[0]) + abs(cury-right[1])
+        if check_num(item):
+            if hand =='right':
+                if left_l < right_l:
+                    answer+='L'
+                    left = [curx,cury]
+                else:
+                    answer+='R'
+                    right=[curx,cury]
+            else:
+                if left_l <= right_l:
+                    answer+='L'
+                    left = [curx,cury]
+                else:
+                    answer+='R'
+                    right=[curx,cury]
+        elif check_lr(item):
+            answer+='L'
+            left = [curx,cury]
+        else:
+            answer+='R'
+            right=[curx,cury]
+    print(answer)
+    return answer
