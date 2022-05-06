@@ -1,0 +1,30 @@
+from collections import deque
+INF = 1e9
+def solution(board):
+    answer=1
+    len_x = len(board)
+    len_y = len(board[0])
+    visited = [[[INF for i in range(4)] for i in range(len_y)]for i in range(len_x)]
+    visited[0][0][0] = 0
+    visited[0][0][1] = 0
+    visited[0][0][2] = 0
+    visited[0][0][3] = 0
+    
+    dq = deque()
+    dx = [0,0,1,-1]
+    dy = [1,-1,0,0]
+    # x,y , 현재 코스트 , 방향
+    dq.append([0,0,0,0])
+    dq.append([0,0,0,2])
+    while dq:
+        x,y,cost,d = dq.popleft()
+        for i in range(4):
+            nx,ny = x+dx[i],y+dy[i]
+            if 0<=nx<len_x and 0<=ny<len_y and board[nx][ny] == 0:
+                ncost = cost+100
+                if d!=i:
+                    ncost+=500
+                if visited[nx][ny][d]>=ncost:
+                    visited[nx][ny][d] = ncost
+                    dq.append([nx,ny,ncost,i])
+    return min(visited[-1][-1])
