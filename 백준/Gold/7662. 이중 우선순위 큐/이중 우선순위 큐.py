@@ -1,40 +1,39 @@
-import heapq
 import sys
+import heapq
 
-input = sys.stdin.readline
-
+input= sys.stdin.readline
 n = int(input())
 for i in range(n):
-    a = int(input())
-    heap = []
-    max_heap = []
+    m = int(input())
+    n_heap = []
+    m_heap = []
     visited = [0 for i in range(1000001)]
-    visited[i] = 1
-    cur = 0
-    for j in range(a):
-        str1, value = input().split()
-        if str1 == 'I':
-            heapq.heappush(heap, [int(value), j])
-            heapq.heappush(max_heap, [-int(value), j])
+    for j in range(m):
+        text,number = map(str,input().split())
+        number = int(number)
+        if text == 'I':
+            heapq.heappush(n_heap, [number,j])
+            heapq.heappush(m_heap, [-number,j])
             visited[j] = 1
-        else:
-            if value[0] == '1':  # 최댓값 삭제
-                while max_heap and not visited[max_heap[0][1]]:
-                    heapq.heappop(max_heap)
-                if len(max_heap) > 0:
-                    visited[max_heap[0][1]] = 0
-                    heapq.heappop(max_heap)
+        elif text == 'D':
+            if number == -1:
+                while len(n_heap) != 0 and visited[n_heap[0][1]] == 0:
+                    heapq.heappop(n_heap)
+                if len(n_heap)!=0:
+                    visited[n_heap[0][1]] = 0
+                    heapq.heappop(n_heap)
             else:
-                while heap and visited[heap[0][1]] == 0:
-                    heapq.heappop(heap)
-                if len(heap) > 0:
-                    visited[heap[0][1]] = 0
-                    heapq.heappop(heap)
-    while heap and visited[heap[0][1]] == 0:
-        heapq.heappop(heap)
-    while max_heap and visited[max_heap[0][1]] == 0:
-        heapq.heappop(max_heap)
-    if len(heap) > 0:
-        print(-max_heap[0][0], heap[0][0])
+                while len(m_heap) != 0 and visited[m_heap[0][1]] == 0:
+                    heapq.heappop(m_heap)
+                if len(m_heap)!=0:
+                    visited[m_heap[0][1]] = 0
+                    heapq.heappop(m_heap)
+    while len(m_heap) and visited[m_heap[0][1]] == 0:
+        heapq.heappop(m_heap)
+    while len(n_heap) and visited[n_heap[0][1]] == 0:
+        heapq.heappop(n_heap)
+    if len(m_heap) == 0:
+        print("EMPTY")
     else:
-        print('EMPTY')
+        print(-heapq.heappop(m_heap)[0],heapq.heappop(n_heap)[0])
+    
