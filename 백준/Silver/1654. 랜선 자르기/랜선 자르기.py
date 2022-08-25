@@ -1,18 +1,24 @@
-a,b = map(int,input().split())
-arr = [int(input()) for _ in range(a)]
-d = 0
-arrc = True
-left=1
-right=max(arr)
-while  left <= right :
+import sys
+from collections import deque
+from itertools import combinations
+sys.setrecursionlimit(10**5)
+
+input = sys.stdin.readline
+
+n , m = map(int,input().split())
+arr = []
+for i in range(n):
+    arr.append(int(input()))
+result = 0
+left , right = 1 ,max(arr)
+while left<=right:
     mid = (left+right)//2
-    c=0
-    for j in range(a):
-        c+=arr[j]//mid
-    if(c>=b):
-        if(d<mid):
-            d=mid
-        left=mid+1
-    elif(c<b):
-        right=mid-1
-print(d)
+    cur_cnt = 0
+    for i in range(n):
+        cur_cnt+= arr[i]//mid
+    if m <= cur_cnt :
+        result = mid
+        left = mid + 1
+    else:
+        right = mid - 1
+print(result)
