@@ -12,6 +12,7 @@ for i in range(n):
         arr[i][j] = a[j]
 def check(x,y):
     cur_cnt1 = 0
+    cur_cnt2 = 0
     flag = 0
     for i in range(x,x+8):
         flag +=1
@@ -20,14 +21,9 @@ def check(x,y):
                 cur_cnt1+=1
             elif (flag+j)%2==1 and arr[i][j] == 'W':
                 cur_cnt1+=1
-    cur_cnt2 = 0
-    flag = 1
-    for i in range(x,x+8):
-        flag +=1
-        for j in range(y,y+8):
-            if (flag+j)%2==0 and arr[i][j] == 'B':
+            if (flag+1+j)%2==0 and arr[i][j] == 'B':
                 cur_cnt2+=1
-            elif (flag+j)%2==1 and arr[i][j] == 'W':
+            elif (flag+1+j)%2==1 and arr[i][j] == 'W':
                 cur_cnt2+=1
     return min(cur_cnt1,cur_cnt2)
 res = 1e9
