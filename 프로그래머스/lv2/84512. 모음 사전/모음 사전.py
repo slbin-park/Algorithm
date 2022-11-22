@@ -1,5 +1,4 @@
 import sys
-sys.setrecursionlimit(10**6)
 def solution(word):
     answer = 0
     arr = ['A','E','I','O','U']
@@ -13,11 +12,8 @@ def solution(word):
             cword.append(arr[i])
             dfs(index+1)
             cword.pop()
-    dfs(0)
-    dfs(1)
-    dfs(2)
-    dfs(3)
-    dfs(4)
+    for i in range(5):
+        dfs(i)
     words.sort()
     for i in range(len(words)):
         if words[i] == word:
