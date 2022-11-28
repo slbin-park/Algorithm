@@ -1,6 +1,6 @@
 # [level 4] 도둑질 - 42897 
 
-[문제 링크](https://programmers.co.kr/learn/courses/30/lessons/42897) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42897) 
 
 ### 성능 요약
 
