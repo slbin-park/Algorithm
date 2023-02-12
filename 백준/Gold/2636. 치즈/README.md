@@ -8,7 +8,7 @@
 
 ### 분류
 
-너비 우선 탐색(bfs), 깊이 우선 탐색(dfs), 그래프 이론(graphs), 그래프 탐색(graph_traversal), 구현(implementation), 시뮬레이션(simulation)
+너비 우선 탐색(bfs), 그래프 이론(graphs), 그래프 탐색(graph_traversal), 구현(implementation), 시뮬레이션(simulation)
 
 ### 문제 설명
 
