@@ -8,17 +8,16 @@ odd = [1, 3, 5, 7]
 
 
 def move_fire(nx, ny, si, di):
-    for i in range(si):
-        nx += dir[di][0]
-        ny += dir[di][1]
-        if nx == n:
-            nx = 0
-        if nx == -1:
-            nx = n - 1
-        if ny == n:
-            ny = 0
-        if ny == -1:
-            ny = n - 1
+    nx += dir[di][0] * si % n
+    ny += dir[di][1] * si % n
+    if nx >= n:
+        nx = nx % n
+    if nx < 0:
+        nx = n - (nx % n)
+    if ny >= n:
+        ny = ny % n
+    if ny == -1:
+        ny = n - (ny % n)
     return nx, ny
 
 
