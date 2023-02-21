@@ -1,94 +1,80 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-class Main {
-    static class Node {
-        int u, v, w;
-
-        public Node(int u, int v, int w) {
-            this.u = u;
-            this.v = v;
-            this.w = w;
-        }
-
-    }
-
-    static int INF = Integer.MIN_VALUE;
+public class Main {
+    //오대위 - 오 - 오대아 순서
     static int[] dx = {-1, 0, 1};
     static int[] dy = {1, 1, 1};
-    static StringTokenizer st;
-    static int N, M, res;
-    static BufferedReader br;
+    static boolean[][] visit;
+    private static StringBuilder sb = new StringBuilder();
+    static int r, c;
+    static char[][] map;
+    static int result;
 
-    static BufferedWriter bw = new BufferedWriter(
-            new OutputStreamWriter(System.out)
-    );
+    public static void main(String[] args) throws Exception {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        //지도 크기얌
+        r = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
+
+        //지도 입력받기
+        map = new char[r][c];
+        for (int i = 0; i < r; i++) {
+            char[] tem = br.readLine().toCharArray();
+            for (int j = 0; j < c; j++) {
+                map[i] = tem;
+            }
+        }
+        result = 0;
+        //방문배열 초기화
+        visit = new boolean[r][c];
+        for (int i = 0; i < r; i++) {
+            dfs(i, 0);
+//            System.out.println("--------------------------------------------");
+//            for (int q = 0; q < r; q++) {
+//                for (int w = 0; w < c; w++) {
+//                    System.out.print(map[q][w] + " ");
+//                }
+//                System.out.println();
+//            }
+        }
 
 
-    public static int op_rank(String oper) {
-        if (oper.equals("(")) {
-            return 0;
-        }
-        if (oper.equals("+") || oper.equals("-")) {
-            return 1;
-        }
-        if (oper.equals("*") || oper.equals("/")) {
-            return 2;
-        }
-        return 3;
+        System.out.println(result);
+
+
     }
 
-    public static boolean is_oper(String oper) {
-        if (oper.equals("(") || oper.equals(")") || oper.equals("+") ||
-                oper.equals("-") || oper.equals("*") || oper.equals("/"))
-            return true;
-        return false;
-    }
-
-    public static boolean dfs(String[][] arr, int x, int y) {
-        if (y == M - 1) {
+    private static boolean dfs(int i, int j) {
+        if (j == c - 1) { //열에 도달 했다면
+            result++;
             return true;
         }
-        for (int i = 0; i < 3; i++) {
-            int nx = x + dx[i];
-            int ny = y + dy[i];
-            if (0 <= nx && nx < N && 0 <= ny && ny < M) {
-                if (arr[nx][ny].equals(".")) {
-                    arr[nx][ny] = "X";
-                    if (dfs(arr, nx, ny)) return true;
+        visit[i][j] = true;
+        for (int go = 0; go < 3; go++) {
+            int gox = i + dx[go];
+            int goy = j + dy[go];
+
+            if (canGo(gox, goy) && map[gox][goy] == '.') { //범위안이면서 갈 수 있다면
+                if (!visit[gox][goy]) {
+                    map[gox][goy] = '%';
+                    visit[gox][goy] = true;
+                    if (dfs(gox, goy)) {
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
 
-
-    public static void main(String[] args) throws IOException {
-        br = new BufferedReader(new InputStreamReader(System.in));
-        st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        res = 0;
-        String[][] arr = new String[N][M];
-        for (int i = 0; i < N; i++) {
-            st = new StringTokenizer(br.readLine());
-            String a = st.nextToken();
-            for (int j = 0; j < M; j++) {
-                arr[i][j] = String.valueOf(a.charAt(j));
-            }
+    private static boolean canGo(int gox, int goy) {
+        if (gox >= 0 && gox < r && goy >= 0 && goy < c) {
+            return true;
         }
-        for (int i = 0; i < N; i++) {
-            if (dfs(arr, i, 0)) {
-                res += 1;
-            }
-        }
-//        for (int i = 0; i < N; i++) {
-//            for (int j = 0; j < M; j++) {
-//                System.out.print(arr[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-        System.out.println(res);
-        bw.flush();
+        return false;
     }
 }
