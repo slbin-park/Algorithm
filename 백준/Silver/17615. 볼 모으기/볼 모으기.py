@@ -12,30 +12,41 @@ sys.setrecursionlimit(10**5)
 n = int(input())
 str1 = input().rstrip()
 # R을 더 올림
-res = 1e9
-cnt = 0
+res = 0
+rres = 0
+bres = 0
 rcnt = 0
-prev = "B"
+bcnt = 0
+prev = ""
 for i in range(n):
     if str1[i] == "R":
         rcnt += 1
-        prev = "R"
     elif str1[i] == "B" and prev == "R":
-        cnt += rcnt
+        rres += rcnt
         rcnt = 0
     if str1[i] == "B":
-        prev = "B"
-res = min(res, cnt)
-cnt = 0
+        bcnt += 1
+    elif str1[i] == "R" and prev == "B":
+        bres += bcnt
+        bcnt = 0
+    prev = str1[i]
+res = min(bres, rres)
+rres = 0
+bres = 0
+rcnt = 0
 bcnt = 0
-for i in range(n):
+prev = ""
+for i in range(n - 1, -1, -1):
+    if str1[i] == "R":
+        rcnt += 1
+    elif str1[i] == "B" and prev == "R":
+        rres += rcnt
+        rcnt = 0
     if str1[i] == "B":
         bcnt += 1
-        prev = "B"
     elif str1[i] == "R" and prev == "B":
-        cnt += bcnt
+        bres += bcnt
         bcnt = 0
-    if str1[i] == "R":
-        prev = "R"
-res = min(res, cnt)
+    prev = str1[i]
+res = min(res, rres, bres)
 print(res)
